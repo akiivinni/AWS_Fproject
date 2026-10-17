@@ -35,7 +35,7 @@ sudo dnf update -y
 
 # Step 2: Install Git and required utilities
 log "Step 2: Installing Git and utilities"
-sudo dnf install -y git curl tar gzip
+sudo dnf install -y git curl-minimal tar gzip
 
 # Step 3: Add Microsoft's package repository
 log "Step 3: Adding Microsoft package repository"
