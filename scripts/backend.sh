@@ -37,39 +37,41 @@ sudo dnf update -y
 log "Step 2: Installing Git and utilities"
 sudo dnf install -y git curl-minimal tar gzip
 
-# Step 3: Add Microsoft's package repository
-log "Step 3: Adding Microsoft package repository"
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+# Step 3: Download Microsoft's official .NET installer
+log "Step 3: Downloading Microsoft's .NET installer"
+curl -fsSL https://dot.net/v1/dotnet-install.sh \
+    -o /tmp/dotnet-install.sh
 
-sudo dnf install -y \
-    https://packages.microsoft.com/config/rhel/9/packages-microsoft-prod.rpm
-
-# Step 4: Install .NET 10 SDK
+# Step 4: Install the .NET 10 SDK
 log "Step 4: Installing .NET 10 SDK"
-sudo dnf install -y dotnet-sdk-10.0
+sudo mkdir -p /usr/share/dotnet
 
-# Step 5: Verify Git installation
-log "Step 5: Verifying Git"
+sudo bash /tmp/dotnet-install.sh \
+    --channel 10.0 \
+    --install-dir /usr/share/dotnet
+
+# Step 5: Configure the dotnet command
+log "Step 5: Configuring the dotnet command"
+sudo ln -sfn /usr/share/dotnet/dotnet /usr/local/bin/dotnet
+
+# Step 6: Verify Git
+log "Step 6: Verifying Git"
 git --version
 
-# Step 6: Verify .NET SDK installation
-log "Step 6: Verifying .NET SDK"
+# Step 7: Verify .NET SDK
+log "Step 7: Verifying .NET SDK"
 dotnet --list-sdks
 
-# Step 7: Verify installed .NET runtimes
-log "Step 7: Verifying .NET runtimes"
+# Step 8: Verify installed .NET runtimes
+log "Step 8: Verifying .NET runtimes"
 dotnet --list-runtimes
 
-# Step 8: Create application deployment directory
-log "Step 8: Creating application deployment directory"
+# Step 9: Create application deployment directory
+log "Step 9: Creating application deployment directory"
 sudo mkdir -p /var/www/employee-api
-
-# Step 9: Set directory ownership for ec2-user
 sudo chown "$USER":"$USER" /var/www/employee-api
 
 log "Application directory permissions configured"
-
-# Step 10: Display deployment directory details
 ls -ld /var/www/employee-api
 
 log "=========================================="
