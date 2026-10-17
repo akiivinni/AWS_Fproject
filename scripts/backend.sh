@@ -45,6 +45,16 @@ curl -fsSL https://dot.net/v1/dotnet-install.sh \
 # Step 4: Install the .NET 10 SDK
 log "Step 4: Installing .NET 10 SDK"
 sudo mkdir -p /usr/share/dotnet
+sudo dnf clean all
+
+for install_path in /tmp /usr/share/dotnet; do
+    available_kb=$(df -Pk "$install_path" | awk 'NR == 2 { print $4 }')
+    if [ -z "$available_kb" ] || [ "$available_kb" -lt 2097152 ]; then
+        log "ERROR: At least 2 GB of free space is required on the filesystem containing $install_path"
+        df -h "$install_path"
+        exit 1
+    fi
+done
 
 sudo bash /tmp/dotnet-install.sh \
     --channel 10.0 \
