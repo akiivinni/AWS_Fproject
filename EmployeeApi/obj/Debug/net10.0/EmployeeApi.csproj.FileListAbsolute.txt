@@ -166,3 +166,4 @@ C:\aws_Fproject\AWS_Fproject\EmployeeApi\bin\Debug\net10.0\runtimes\osx-x64\nati
 C:\aws_Fproject\AWS_Fproject\EmployeeApi\bin\Debug\net10.0\runtimes\win-arm64\native\msalruntime_arm64.dll
 C:\aws_Fproject\AWS_Fproject\EmployeeApi\bin\Debug\net10.0\runtimes\win-x64\native\msalruntime.dll
 C:\aws_Fproject\AWS_Fproject\EmployeeApi\bin\Debug\net10.0\runtimes\win-x86\native\msalruntime_x86.dll
+C:\aws_Fproject\AWS_Fproject\EmployeeApi\obj\Debug\net10.0\EmployeeApi.sourcelink.json
